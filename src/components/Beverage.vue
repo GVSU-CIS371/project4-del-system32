@@ -31,4 +31,6 @@ type Props = {
   beverage: string;
 };
 defineProps<Props>();
+
+export type { Props };
 </script>

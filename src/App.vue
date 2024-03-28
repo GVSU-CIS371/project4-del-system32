@@ -6,6 +6,8 @@
       :syrup="currentSyrup"
       :beverage="currentBeverage"
     />
+    <!--  Added <p> for text box  -->
+    <p>Name: <input type="text" v-model="name" /></p>
     <ul>
       <li>
         <template v-for="temp in temps" :key="temp">
@@ -63,6 +65,10 @@
           </label>
         </template>
       </li>
+      <!--  Added <li><button> to save beverage selection  -->
+      <li>
+        <button @click="makeBeverage">MAKE BEVERAGE</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -79,6 +85,18 @@ const syrups = ref(["None", "Vanilla", "Caramel", "Hazelnut"]);
 const currentSyrup = ref("None");
 const baseBeverages = ref(["Coffee", "Green Tea", "Black Tea"]);
 const currentBeverage = ref("Coffee");
+
+// Added code
+const name = ref("Default");
+
+import { useBevStore } from './stores/BevStore';
+
+const bevStore = useBevStore();
+const makeBeverage = () => {
+  bevStore.$patch((state) => {
+    state.items.push;
+  })
+}
 </script>
 
 <style lang="scss">
