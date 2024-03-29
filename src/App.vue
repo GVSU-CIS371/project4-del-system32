@@ -68,25 +68,26 @@
       </li>
       <!--  Added <li><button> to save beverage selection  -->
       <li>
-        <button @click="makeBeverage(name)">MAKE BEVERAGE</button>
+        <!-- need to return currently selected bev mods -->
+        <button @click="makeBeverage(
+          Beverage.name, 
+          Beverage.currentTemp, 
+          Beverage.currentCreamer, 
+          Beverage.currentSyrup,
+          Beverage.currentBeverage)">MAKE BEVERAGE</button>
       </li>
-      <!-- <li 
-        v-for="item in bevStore.items"
-        :key="'bev-${idx}'"
-        :item="item"
-        > -->
-        <li>
-          <template v-for="item in bevStore.items" :key="'bev-${idx}'" :item="item">
-            <label>
-              <input
-                type="radio"
-                name="Make Beverage"
-                v-model="name"
-              />
-              {{ item.name }}
-            </label>
-          </template>
-        <!-- {{ item.name }} -->
+      <li>
+        <template v-for="item in bevStore.items" :key="'bev-${idx}'" :item="item">
+          <label>
+            <input
+              type="radio"
+              name="Make Beverage"
+              :value="item.name"
+              v-model="name"
+            />
+            {{ item.name }}
+          </label>
+        </template>
       </li>
     </ul>
   </div>
@@ -112,23 +113,34 @@ import { useBevStore } from './stores/BevStore';
 // import { Props } from "./components/Beverage.vue";
 
 const bevStore = useBevStore();
-// const makeBeverage = (bev: Props) => {
-//   bevStore.$patch((state) => {
-//     state.items.push(bev);
-//     })
-// }
-
-// test code with deafult select
-const makeBeverage = (name: string) => {
+const makeBeverage = (
+  currName: string, 
+  currIsIced: boolean, 
+  currCreamer: string, 
+  currSyrup: string, 
+  currBeverage: string) => {
   bevStore.$patch((state) => {
     state.items.push({
-      name: name,
-      isIced: true,
-      creamer: "Milk",
-      syrup: "Vanilla",
-      beverage: "Coffee" });
-    })
+      name: currName,
+      isIced: currIsIced,
+      creamer: currCreamer,
+      syrup: currSyrup,
+      beverage: currBeverage
+    });
+  })
 }
+
+// test code with deafult select
+// const makeBeverage = (name: string) => {
+//   bevStore.$patch((state) => {
+//     state.items.push({
+//       name: name,
+//       isIced: true,
+//       creamer: "Milk",
+//       syrup: "Vanilla",
+//       beverage: "Coffee" });
+//     })
+// }
 </script>
 
 <style lang="scss">
