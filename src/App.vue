@@ -67,7 +67,14 @@
       </li>
       <!--  Added <li><button> to save beverage selection  -->
       <li>
-        <button @click="makeBeverage">MAKE BEVERAGE</button>
+        <button @click="makeBeverage()">MAKE BEVERAGE</button>
+      </li>
+      <li 
+        v-for="(item) in bevStore.items"
+        :key="'bev-${idx}'"
+        :item="item"
+        >
+        {{ item.beverage }}
       </li>
     </ul>
   </div>
@@ -90,12 +97,24 @@ const currentBeverage = ref("Coffee");
 const name = ref("Default");
 
 import { useBevStore } from './stores/BevStore';
+// import { Props } from "./components/Beverage.vue";
 
 const bevStore = useBevStore();
+// const makeBeverage = (bev: Props) => {
+//   bevStore.$patch((state) => {
+//     state.items.push(bev);
+//     })
+// }
+
+// test code with deafult select
 const makeBeverage = () => {
   bevStore.$patch((state) => {
-    state.items.push;
-  })
+    state.items.push({
+      isIced: true,
+      creamer: "Milk",
+      syrup: "Vanilla",
+      beverage: "test" });
+    })
 }
 </script>
 
