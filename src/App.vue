@@ -1,6 +1,7 @@
 <template>
   <div>
     <Beverage
+      :name="name"
       :isIced="currentTemp === 'Cold'"
       :creamer="currentCreamer"
       :syrup="currentSyrup"
@@ -67,14 +68,25 @@
       </li>
       <!--  Added <li><button> to save beverage selection  -->
       <li>
-        <button @click="makeBeverage()">MAKE BEVERAGE</button>
+        <button @click="makeBeverage(name)">MAKE BEVERAGE</button>
       </li>
-      <li 
-        v-for="(item) in bevStore.items"
+      <!-- <li 
+        v-for="item in bevStore.items"
         :key="'bev-${idx}'"
         :item="item"
-        >
-        {{ item.beverage }}
+        > -->
+        <li>
+          <template v-for="item in bevStore.items" :key="'bev-${idx}'" :item="item">
+            <label>
+              <input
+                type="radio"
+                name="Make Beverage"
+                v-model="name"
+              />
+              {{ item.name }}
+            </label>
+          </template>
+        <!-- {{ item.name }} -->
       </li>
     </ul>
   </div>
@@ -107,9 +119,10 @@ const bevStore = useBevStore();
 // }
 
 // test code with deafult select
-const makeBeverage = () => {
+const makeBeverage = (name: string) => {
   bevStore.$patch((state) => {
     state.items.push({
+      name: name,
       isIced: true,
       creamer: "Milk",
       syrup: "Vanilla",

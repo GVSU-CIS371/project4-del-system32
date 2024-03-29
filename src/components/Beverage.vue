@@ -25,6 +25,7 @@ import Hot from "./Hot.vue";
 import Cold from "./Cold.vue";
 
 type Props = {
+  name: string;       // added name property for name implementation
   isIced: boolean;
   creamer: string;
   syrup: string;
