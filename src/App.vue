@@ -126,7 +126,7 @@ const makeBeverage = (name: string) => {
       isIced: true,
       creamer: "Milk",
       syrup: "Vanilla",
-      beverage: "test" });
+      beverage: "Coffee" });
     })
 }
 </script>
