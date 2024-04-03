@@ -70,11 +70,11 @@
       <li>
         <!-- need to return currently selected bev mods -->
         <button @click="makeBeverage(
-          Beverage.name, 
-          Beverage.currentTemp, 
-          Beverage.currentCreamer, 
-          Beverage.currentSyrup,
-          Beverage.currentBeverage)">MAKE BEVERAGE</button>
+          name, 
+          currentTemp == 'Cold', 
+          currentCreamer, 
+          currentSyrup,
+          currentBeverage)">MAKE BEVERAGE</button>
       </li>
       <li>
         <template v-for="item in bevStore.items" :key="'bev-${idx}'" :item="item">
